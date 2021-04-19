@@ -1,6 +1,6 @@
 {
   "name": "@jasp/m365-authenticator",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Authentication wrapper for M365. Handles popup and redirect flows depending on browser and environment. Uses authorization code flow for Single-Page Applications. Supports native apps built with trigger.io.",
   "main": "index.js",
   "author": "JASP <info@jasp.eu>",
@@ -9,6 +9,10 @@
   "files": [
     "/dist"
   ],
+  "scripts": {
+    "build": "tsc",
+    "publish": "npm publish @jasp/m365-authenticator"
+  },
   "dependencies": {
     "@jasp/m365-graph": "^1.0.0",
     "axios": "^0.21.1",
