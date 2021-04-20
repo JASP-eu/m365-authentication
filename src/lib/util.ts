@@ -10,11 +10,12 @@ export const getSearchParams = (hash: string) => {
   return params
 }
 
-const _window: any = window
-export const isApp = () => !!_window.forge
-export const openWithOptions = _window.forge?.tabs?.openWithOptions ?? (() => undefined)
+const _window: (Window & Record<string, any>) | undefined =
+  typeof window !== 'undefined' ? window : undefined
+export const isApp = () => !!_window?.forge
+export const openWithOptions = _window?.forge?.tabs?.openWithOptions ?? (() => undefined)
 
-const ua = window.navigator.userAgent
+const ua = _window?.navigator.userAgent ?? ''
 const msie = ua.indexOf('MSIE ')
 const msie11 = ua.indexOf('Trident/')
 const msEdge = ua.indexOf('Edge/')

@@ -36,28 +36,30 @@ export class AuthProvider {
     this.scopes = scopes
     this.redirectUri = redirectUri
 
-    const codeIndex = window.location.href.indexOf('?code=')
-    if (codeIndex) {
-      const code = getSearchParams(window.location.href.slice(codeIndex)).code
-      if (code) {
-        if (this.status === POPUP) {
-          this.code = code
-          window.close()
-        } else {
-          this.status = RESOLVING_REDIRECT_TOKEN
+    if (typeof window !== 'undefined') {
+      const codeIndex = window.location.href.indexOf('?code=')
+      if (codeIndex) {
+        const code = getSearchParams(window.location.href.slice(codeIndex)).code
+        if (code) {
+          if (this.status === POPUP) {
+            this.code = code
+            window.close()
+          } else {
+            this.status = RESOLVING_REDIRECT_TOKEN
 
-          try {
-            this.acquireTokenViaCode(code)
-          } catch (e) {
-            // invalid state produced by user
+            try {
+              this.acquireTokenViaCode(code)
+            } catch (e) {
+              // invalid state produced by user
+            }
+
+            const href = window.location.href
+            const urlWithoutHash = href.slice(0, href.indexOf('?code='))
+            window.history.pushState({}, document.title, urlWithoutHash)
           }
-
-          const href = window.location.href
-          const urlWithoutHash = href.slice(0, href.indexOf('?code='))
-          window.history.pushState({}, document.title, urlWithoutHash)
+        } else {
+          this.clearTempAuthState()
         }
-      } else {
-        this.clearTempAuthState()
       }
     }
   }
