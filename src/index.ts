@@ -1,5 +1,11 @@
 export { AuthProvider } from './lib/authProvider'
-export { withAuthentication } from './components/withAuthentication'
+
+export {
+  withAuthentication,
+  LoginProps,
+  AuthenticationProps,
+} from './components/withAuthentication'
+
 export {
   MS365_ID_TOKEN,
   MS365_ACCESS_TOKEN,

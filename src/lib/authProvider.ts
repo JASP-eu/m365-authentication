@@ -38,7 +38,7 @@ export class AuthProvider {
 
     if (typeof window !== 'undefined') {
       const codeIndex = window.location.href.indexOf('?code=')
-      if (codeIndex) {
+      if (codeIndex > -1) {
         const code = getSearchParams(window.location.href.slice(codeIndex)).code
         if (code) {
           if (this.status === POPUP) {
@@ -138,8 +138,6 @@ export class AuthProvider {
    * @returns the url
    */
   getAuthCodeLoginUrl() {
-    const challenge = pkceChallenge()
-
     return (
       'https://login.microsoftonline.com/common/oauth2/v2.0/authorize?' +
       `client_id=${this.clientId}` +
@@ -148,7 +146,7 @@ export class AuthProvider {
       `&state=${encodeURIComponent(`originUrl=[${window.location.href}]`)}` +
       '&response_type=code' +
       '&response_mode=query' +
-      `&code_challenge=${challenge.code_challenge}` +
+      `&code_challenge=${this.challenge.code_challenge}` +
       '&code_challenge_method=S256'
     )
   }
@@ -288,6 +286,7 @@ export class AuthProvider {
         this.login()
       }
     } else {
+      console.log('have no refresh token :-(')
       this.logout()
     }
   }

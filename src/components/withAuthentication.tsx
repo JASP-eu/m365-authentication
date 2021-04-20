@@ -12,14 +12,14 @@ interface AccountInfo {
   tenantId: string
 }
 
-interface AuthenticationProps {
+export interface AuthenticationProps {
   account: AccountInfo
-  login: () => any
-  logout: () => any
+  login: () => void
+  logout: () => void
 }
 
-interface LoginProps {
-  login: () => any
+export interface LoginProps {
+  login: () => void
 }
 
 export const withAuthentication = function <T>(

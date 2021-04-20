@@ -1,18 +1,17 @@
 {
-  "name": "@jasp/m365-authenticator",
-  "version": "1.0.8",
+  "name": "@jasp/m365-authentication",
+  "version": "1.0.0",
   "description": "Authentication wrapper for M365. Handles popup and redirect flows depending on browser and environment. Uses authorization code flow for Single-Page Applications. Supports native apps built with trigger.io.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "author": "JASP <info@jasp.eu>",
-  "repository": "https://github.com/JASP-eu/m365-authenticator.git",
+  "repository": "https://github.com/JASP-eu/m365-authentication.git",
   "license": "ISC",
   "files": [
     "/dist"
   ],
   "scripts": {
-    "build": "tsc",
-    "publish": "npm publish @jasp/m365-authenticator"
+    "build": "tsc"
   },
   "dependencies": {
     "@jasp/m365-graph": "^1.0.0",
